@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pharmacy Inventory</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  </head>
+  <body>
+    <!-- LOGIN VIEW -->
+    <div id="login-view" class="view login-page">
+      <div class="login-box">
+        <h1>💊 Pharmacy Inventory</h1>
+        <form id="loginForm">
+          <input
+            type="text"
+            id="username"
+            placeholder="Username (e.g., staff1)"
+            required
+          />
+          <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            required
+          />
+          <button type="submit">Log In</button>
+        </form>
+        <p id="loginError" class="error"></p>
+      </div>
+    </div>
+
+    <!-- DASHBOARD VIEW -->
+    <div id="dashboard-view" class="view" style="display: none">
+      <header>
+        <h1>💊 Pharmacy Inventory</h1>
+        <div class="header-actions">
+          <span id="userInfo"></span>
+          <button onclick="logout()">Logout</button>
+        </div>
+      </header>
+
+      <main>
+        <div class="toolbar">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="🔍 Search medications..."
+          />
+          <button id="filterExpiring">Expiring</button>
+          <button id="showAll" class="active">All Items</button>
+          <button onclick="openAddModal()">+ Add New Medication</button>
+        </div>
+
+        <table id="inventoryTable">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Quantity</th>
+              <th>Expires</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </main>
+
+      <!-- Transaction Modal -->
+      <div id="transactionModal" class="modal">
+        <div class="modal-content">
+          <h3 id="modalTitle">Transaction</h3>
+          <p>Current quantity: <span id="currentQty"></span></p>
+          <label
+            ><input type="radio" name="action" value="add" checked /> Add</label
+          >
+          <label
+            ><input type="radio" name="action" value="withdraw" />
+            Withdraw</label
+          >
+          <input
+            type="number"
+            id="amount"
+            placeholder="Amount"
+            min="1"
+            required
+          />
+          <input type="text" id="note" placeholder="Note (optional)" />
+          <div class="modal-actions">
+            <button onclick="closeModal()">Cancel</button>
+            <button onclick="submitTransaction()">Confirm</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add Medication Modal -->
+      <div id="addMedModal" class="modal">
+        <div class="modal-content">
+          <h3>Add New Medication</h3>
+          <input
+            type="text"
+            id="newName"
+            placeholder="Medication name"
+            required
+          />
+          <input
+            type="number"
+            id="newQty"
+            placeholder="Initial quantity"
+            min="0"
+            required
+          />
+          <input type="date" id="newExpiry" required />
+          <div class="modal-actions">
+            <button onclick="closeAddModal()">Cancel</button>
+            <button onclick="submitNewMed()">Add</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edit Medication Modal -->
+      <div id="editMedModal" class="modal">
+        <div class="modal-content">
+          <h3>Edit Medication</h3>
+          <input
+            type="text"
+            id="editName"
+            placeholder="Medication name"
+            required
+          />
+          <input type="date" id="editExpiry" required />
+          <div class="modal-actions">
+            <button onclick="closeEditModal()">Cancel</button>
+            <button onclick="submitEdit()">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
