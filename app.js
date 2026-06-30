@@ -1,6 +1,6 @@
 // ==================== CONFIG ====================
-const SUPABASE_URL = "https://YOUR_PROJECT_URL.supabase.co";
-const SUPABASE_KEY = "YOUR_ANON_PUBLIC_KEY";
+const SUPABASE_URL = "https://pgqjpbccjstnkzfnkbiv.supabase.co";
+const SUPABASE_KEY = "sb_publishable_5EkQuo__f-rleuSd2kFkNw_tS54Qo7W";
 const EMAIL_DOMAIN = "pharmacy.local"; // Appended to username
 
 // ==================== INIT ====================
