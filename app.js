@@ -1,7 +1,6 @@
 // ==================== CONFIG ====================
 const SUPABASE_URL = "https://pgqjpbccjstnkzfnkbiv.supabase.co";
 const SUPABASE_KEY = "sb_publishable_5EkQuo__f-rleuSd2kFkNw_tS54Qo7W";
-const EMAIL_DOMAIN = "pharmacy.local"; // Appended to username
 
 // ==================== INIT ====================
 const { createClient } = supabase;
@@ -31,8 +30,8 @@ async function checkSession() {
   }
 }
 
-async function login(username, password) {
-  const email = `${username}@${EMAIL_DOMAIN}`;
+async function login(Email, password) {
+  const email = `${Email}`;
   const { data, error } = await supabaseClient.auth.signInWithPassword({
     email,
     password,
